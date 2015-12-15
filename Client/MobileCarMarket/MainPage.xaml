@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="MobileCarMarket.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MobileCarMarket"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="80"/>
+            <RowDefinition MaxHeight="40" />
+            <RowDefinition MaxHeight="40" />
+            <RowDefinition MaxHeight="40" />
+            <RowDefinition MaxHeight="40" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="12*" MaxWidth="450"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="MobileCarMarket" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="30" />
+        <TextBox Name="usernameTextBox" PlaceholderText="Username" Grid.Row="1" Grid.Column="1" Margin="0, 0, 0, 5" />
+        <PasswordBox Name="passwordBox" PlaceholderText="Password" Grid.Row="2" Grid.Column="1" Margin="0, 5, 0, 0" />
+        <Button Name="signinButton" Content="Sign-In" Grid.Row="3" Grid.Column="1" Margin="0, 5, 0, 0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="signinButton_Click" />
+        <HyperlinkButton Content="Not registered? Sign-up" Grid.Row="4" Grid.Column="1" />
+    </Grid>
+</Page>
