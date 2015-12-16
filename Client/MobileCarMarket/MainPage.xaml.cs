@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MobileCarMarket.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,11 +26,20 @@ namespace MobileCarMarket
         public MainPage()
         {
             this.InitializeComponent();
+
+            var contentViewModel = new StartUpContentViewModel();
+
+            this.DataContext = new MainPageViewModel(contentViewModel);
         }
 
-        private void signinButton_Click(object sender, RoutedEventArgs e)
+        private void GoToRegistration(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(RegistrationPage));
+        }
+
+        private void navigateToNavigationPage_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(NavigationPage));
         }
     }
 }

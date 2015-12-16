@@ -98,13 +98,46 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FavouritesPage.xaml.cs">
+      <DependentUpon>FavouritesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\DelegateCommand.cs" />
+    <Compile Include="Helpers\DelegateCommandWithParameter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyAdsPage.xaml.cs">
+      <DependentUpon>MyAdsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationPage.xaml.cs">
+      <DependentUpon>NavigationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublishPage.xaml.cs">
+      <DependentUpon>PublishPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SearchPage.xaml.cs">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\MyAdsViewModel.cs" />
+    <Compile Include="ViewModels\MyAdsContentViewModel.cs" />
+    <Compile Include="ViewModels\FavouritesContentViewModel.cs" />
+    <Compile Include="ViewModels\FavouritesViewModel.cs" />
+    <Compile Include="ViewModels\IContentViewModel.cs" />
+    <Compile Include="ViewModels\IPageViewModel.cs" />
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\NavigationContentViewModel.cs" />
+    <Compile Include="ViewModels\PublishContentViewModel.cs" />
+    <Compile Include="ViewModels\PublishViewModel.cs" />
+    <Compile Include="ViewModels\RegistrationContentViewModel.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel.cs" />
+    <Compile Include="ViewModels\SearchContentViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\StartUpContentViewModel.cs" />
+    <Compile Include="ViewModels\StartUpViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -128,11 +161,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="FavouritesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MyAdsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NavigationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PublishPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

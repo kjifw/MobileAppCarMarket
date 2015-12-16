@@ -21,13 +21,13 @@ namespace MobileCarMarket
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RegistrationPage : Page
+    public sealed partial class SearchPage : Page
     {
-        public RegistrationPage()
+        public SearchPage()
         {
             this.InitializeComponent();
 
-            var contentViewModel = new RegistrationContentViewModel();
+            var contentViewModel = new SearchContentViewModel();
 
             this.DataContext = new MainPageViewModel(contentViewModel);
         }

@@ -1,0 +1,56 @@
+﻿<Page
+    x:Class="MobileCarMarket.SearchPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MobileCarMarket"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels ="using:MobileCarMarket.ViewModels"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="80"/>
+            <RowDefinition MaxHeight="160" />
+            <RowDefinition MaxHeight="80"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <viewModels:SearchViewModel x:Key="SearchData" />
+        </Grid.Resources>
+        <TextBlock Text="{Binding Title}"
+                   Grid.Row="0" Grid.Column="0"
+                   Grid.ColumnSpan="3"
+                   HorizontalAlignment="Center"
+                   FontSize="30"/>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="50"/>
+                <RowDefinition MaxHeight="50"/>
+                <RowDefinition MaxHeight="50"/>
+            </Grid.RowDefinitions>
+            <ComboBox HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Grid.Row="0"
+                  Margin="5"
+                  PlaceholderText="Select Manufacturer"/>
+            <ComboBox HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Grid.Row="1"
+                  Margin="5"
+                  PlaceholderText="Select Model"/>
+            <CheckBox Name="IsUsed"
+                  Content="Used"
+                  Grid.Row="2"
+                  Margin="5" 
+                  IsChecked="{Binding Used}"/>
+        </Grid>
+        <Button Content="Search"
+                Grid.Row="2"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Margin="5" 
+                CommandParameter="{StaticResource SearchData}"
+                Command="{Binding ContentViewModel.SearchCommand}"/>
+    </Grid>
+</Page>
