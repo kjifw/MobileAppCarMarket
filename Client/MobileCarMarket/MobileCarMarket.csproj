@@ -109,6 +109,7 @@
     <Compile Include="MyAdsPage.xaml.cs">
       <DependentUpon>MyAdsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyItem.cs" />
     <Compile Include="NavigationPage.xaml.cs">
       <DependentUpon>NavigationPage.xaml</DependentUpon>
     </Compile>

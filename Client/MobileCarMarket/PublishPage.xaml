@@ -8,10 +8,17 @@
     xmlns:viewModels="using:MobileCarMarket.ViewModels"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <DataTemplate x:Key="MyItemDataTemplate" x:DataType="local:MyItem">
+            <TextBlock Text="{Binding Text}" />
+        </DataTemplate>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="80"/>
-            <RowDefinition MaxHeight="320"/>
+            <RowDefinition MaxHeight="250"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="50"/>
             <RowDefinition MaxHeight="50"/>
         </Grid.RowDefinitions>
         <Grid.Resources>
@@ -26,7 +33,6 @@
 
         <Grid Grid.Row="1" Grid.Column="0" DataContext="{StaticResource DataToPublish}">
             <Grid.RowDefinitions>
-                <RowDefinition MaxHeight="50"/>
                 <RowDefinition MaxHeight="50"/>
                 <RowDefinition MaxHeight="50"/>
                 <RowDefinition MaxHeight="50"/>
@@ -60,21 +66,50 @@
                      VerticalAlignment="Stretch"
                      Margin="5" 
                      Text="{Binding Description}" />
-            <CheckBox Name="IsUsed"
+            <CheckBox Name="IsNew"
                       Grid.Row="4" 
-                      Content="Used"
+                      Content="New"
                       Margin="5"
-                      IsChecked="{Binding Used}"/>
-            <Button Name="Picture" 
-                    Grid.Row="5" 
-                    Content="Take a picture"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" 
-                    Margin="5"/>
+                      IsChecked="{Binding IsNew}"/>
         </Grid>
+
+        <ListView Name="listViewUploadImages" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.ZoomMode="Disabled"
+                AllowDrop="True" SelectionMode="Extended"
+                DragOver="listViewUploadImages_DragOver"
+                Drop="listViewUploadImages_Drop" 
+                CanDragItems="True" 
+                DragItemsStarting="listViewUploadImages_DragItemsStarting"
+                ItemTemplate="{StaticResource MyItemDataTemplate}"
+                ItemsSource="{x:Bind MyItems}">
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"></StackPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+        
+        <ListView Name="listViewAllImages" Grid.Row="3" Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.ZoomMode="Disabled"
+                AllowDrop="True" SelectionMode="Extended"
+                DragOver="listViewAllImages_DragOver"
+                Drop="listViewAllImages_Drop" 
+                CanDragItems="True" 
+                DragItemsStarting="listViewAllImages_DragItemsStarting" 
+                ItemTemplate="{StaticResource MyItemDataTemplate}"
+                ItemsSource="{x:Bind MyItemsTwo}">
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" AllowDrop="True"></StackPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+
         <Button Name="Publish" 
-                Grid.Row="2" 
-                Content="Publish Ad"
+                Grid.Row="4" 
+                Content="Publish"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch" 
                 Margin="5"
