@@ -8,17 +8,17 @@
         }
 
         public StartUpViewModel(StartUpViewModel model)
-            : this(model.Username, model.Password)
+            : this(model.Email, model.Password)
         {
         }
 
-        public StartUpViewModel(string username, string password)
+        public StartUpViewModel(string email, string password)
         {
-            this.Username = username;
+            this.Email = email;
             this.Password = password;
         }
 
-        public string Username { get; set; }
+        public string Email { get; set; }
 
         public string Password { get; set; }
     }

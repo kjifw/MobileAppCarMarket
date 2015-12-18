@@ -36,9 +36,9 @@
                 <RowDefinition MaxHeight="40"/>
                 <RowDefinition MaxHeight="40"/>
             </Grid.RowDefinitions>
-            <TextBox Name="usernameTextBox" 
-                 Text="{Binding Username, Mode=TwoWay}" 
-                 PlaceholderText="Username"
+            <TextBox Name="emailTextBox" 
+                 Text="{Binding Email, Mode=TwoWay}" 
+                 PlaceholderText="Email"
                  Grid.Row="0" Grid.Column="1" 
                  Margin="0, 0, 0, 5" />
             <PasswordBox Name="passwordBox" 

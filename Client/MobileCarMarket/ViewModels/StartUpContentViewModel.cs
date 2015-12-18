@@ -1,8 +1,10 @@
-﻿using MobileCarMarket.Helpers;
-using System.Windows.Input;
-
-namespace MobileCarMarket.ViewModels
+﻿namespace MobileCarMarket.ViewModels
 {
+    using System.Windows.Input;
+
+    using Helpers;
+    using Http;
+
     public class StartUpContentViewModel : ViewModelBase, IContentViewModel
     {
         private ICommand signInCommand;
@@ -14,9 +16,30 @@ namespace MobileCarMarket.ViewModels
             {
                 if (this.signInCommand == null)
                 {
-                    this.signInCommand = new DelegateCommandWithParameter<StartUpViewModel>((model) =>
+                    this.signInCommand = new DelegateCommandWithParameter<StartUpViewModel>(async (model) =>
                     {
+                        if(model.Email.Length == 0)
+                        {
+                            MessageBox.Show("Blank email");
+                            return;
+                        }
 
+                        if (model.Password.Length == 0)
+                        {
+                            MessageBox.Show("Blank password");
+                            return;
+                        }
+
+                        var httpAuth = new HttpAuth("http://localhost:60178/token");
+                        var authResult = await httpAuth.Login(model.Email, model.Password);
+
+                        if(authResult.Succeeded == false)
+                        {
+                            MessageBox.Show("Wrong username or password");
+                            return;
+                        }
+
+                        new NavigationService().Navigate(typeof(NavigationPage));
                     });
                 }
 
@@ -32,7 +55,7 @@ namespace MobileCarMarket.ViewModels
                 {
                     this.singUpCommand = new DelegateCommand(() =>
                     {
-
+                        new NavigationService().Navigate(typeof(RegistrationPage));
                     });
                 }
 

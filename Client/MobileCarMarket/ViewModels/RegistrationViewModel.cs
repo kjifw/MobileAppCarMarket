@@ -8,18 +8,18 @@
         }
 
         public RegistrationViewModel(RegistrationViewModel model)
-            : this(model.Username, model.Password, model.ConfirmPassword)
+            : this(model.Email, model.Password, model.ConfirmPassword)
         {
         }
 
-        public RegistrationViewModel(string username, string password, string confirmPassword)
+        public RegistrationViewModel(string email, string password, string confirmPassword)
         {
-            this.Username = username;
+            this.Email = email;
             this.Password = password;
             this.ConfirmPassword = confirmPassword;
         }
 
-        public string Username { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
     }

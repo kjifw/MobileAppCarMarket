@@ -103,6 +103,11 @@
     </Compile>
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Helpers\DelegateCommandWithParameter.cs" />
+    <Compile Include="Helpers\INavigationService.cs" />
+    <Compile Include="Helpers\MessageBox.cs" />
+    <Compile Include="Helpers\NavigationService.cs" />
+    <Compile Include="Http\HttpAuth.cs" />
+    <Compile Include="Http\HttpResult.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

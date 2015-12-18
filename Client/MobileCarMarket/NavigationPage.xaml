@@ -21,8 +21,8 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition MaxHeight="100" />
-                <RowDefinition MaxHeight="100"/>
-                <RowDefinition />
+                <RowDefinition MaxHeight="100" />
+                <RowDefinition MaxHeight="100" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -57,6 +57,13 @@
                 HorizontalAlignment="Stretch"
                 Margin="5"
                 Click="MyAdsClick"/>
+
+            <Button Content="Take Photo"
+                Grid.Row="2" Grid.Column="0"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Margin="5"
+                Click="TakePhoto" />
         </Grid>
     </Grid>
 </Page>

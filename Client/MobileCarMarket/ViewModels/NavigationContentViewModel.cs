@@ -9,6 +9,7 @@
         private ICommand publishCommand;
         private ICommand favouritesCommand;
         private ICommand viewMyAdsCommand;
+        private ICommand takePhoto;
 
         public ICommand SearchCommand
         {
@@ -71,6 +72,22 @@
                 }
 
                 return this.viewMyAdsCommand;
+            }
+        }
+
+        public ICommand TakePhoto
+        {
+            get
+            {
+                if (this.takePhoto == null)
+                {
+                    this.takePhoto = new DelegateCommand(() =>
+                    {
+
+                    });
+                }
+
+                return this.takePhoto;
             }
         }
     }

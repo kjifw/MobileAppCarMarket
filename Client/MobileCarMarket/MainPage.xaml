@@ -30,35 +30,35 @@
                    Grid.ColumnSpan="3" 
                    HorizontalAlignment="Center" 
                    FontSize="30" />
-        
+
         <Grid Grid.Row="1" Grid.Column="1" DataContext="{StaticResource UserData}">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <TextBox Name="usernameTextBox" 
-                 Text="{Binding Username, Mode=TwoWay}" 
+                 Text="{Binding Email, Mode=TwoWay}" 
                  PlaceholderText="Username"
                  Grid.Row="0" Grid.Column="1" 
                  Margin="0, 0, 0, 5" />
 
-            <PasswordBox Password="{Binding Password, Mode=TwoWay}" 
-                         Name="passwordBox" 
+            <PasswordBox Name="passwordBox"
+                         Password="{Binding Password, Mode=TwoWay}" 
                          PlaceholderText="Password"
                          Grid.Row="1" Grid.Column="1"
                          Margin="0, 0, 0, 5" />
         </Grid>
-        
+
         <Button Name="signinButton"
                 Content="Sign-In" 
                 Grid.Row="2" Grid.Column="1"
-                Margin="0, 5, 0, 0" 
-                VerticalAlignment="Stretch" 
+                Margin="0.333,5,25,0" 
+                VerticalAlignment="Top" 
                 HorizontalAlignment="Stretch"                
                 CommandParameter="{StaticResource UserData}"
-                Command="{Binding ContentViewModel.SignInCommand}" />
+                Command="{Binding ContentViewModel.SignInCommand}" Grid.ColumnSpan="2" Height="35" />
         <HyperlinkButton Content="Not registered? Sign-up" 
-                         Grid.Row="3" Grid.Column="1" Click="GoToRegistration"/>
+                         Grid.Row="3" Grid.Column="1" Command="{Binding ContentViewModel.SignUpCommand}" />
         <Grid Name="Testing" Grid.Row="4" Grid.Column="1" >
             <Grid.RowDefinitions>
                 <RowDefinition/>

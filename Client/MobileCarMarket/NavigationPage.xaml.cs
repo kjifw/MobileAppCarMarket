@@ -51,5 +51,10 @@ namespace MobileCarMarket
         {
             this.Frame.Navigate(typeof(SearchPage));
         }
+
+        private void TakePhoto(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(SearchPage));
+        }
     }
 }
