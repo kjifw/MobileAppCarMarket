@@ -1,9 +1,12 @@
 ﻿namespace MobileCarMarket.ViewModels
 {
     using System.Windows.Input;
+    using System.IO;
+    using Windows.Storage;
 
     using Helpers;
     using Http;
+    using LocalDb;
 
     public class StartUpContentViewModel : ViewModelBase, IContentViewModel
     {
@@ -38,6 +41,10 @@
                             MessageBox.Show("Wrong username or password");
                             return;
                         }
+
+                        var userDbFile = Path.Combine(ApplicationData.Current.LocalFolder.Path, model.Email + ".db3");
+                        var userDbKeySeed = CryptoUtils.GenerateHash(model.Email, model.Password);
+                        LocalStorage.Initialize(userDbFile, userDbKeySeed);
 
                         new NavigationService().Navigate(typeof(NavigationPage));
                     });

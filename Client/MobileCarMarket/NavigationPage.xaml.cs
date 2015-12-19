@@ -28,7 +28,6 @@ namespace MobileCarMarket
             this.InitializeComponent();
 
             var contentViewModel = new NavigationContentViewModel();
-
             this.DataContext = new MainPageViewModel(contentViewModel);
         }
 

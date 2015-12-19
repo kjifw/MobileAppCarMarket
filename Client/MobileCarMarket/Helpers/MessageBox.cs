@@ -1,13 +1,14 @@
 ﻿namespace MobileCarMarket.Helpers
 {
+    using System;
     using Windows.UI.Popups;
 
     public static class MessageBox
     {
-        public static void Show(string message)
+        public static async void Show(string message)
         {
             var dialog = new MessageDialog(message);
-            dialog.ShowAsync().GetResults();
+            await dialog.ShowAsync().AsTask();
         }
     }
 }

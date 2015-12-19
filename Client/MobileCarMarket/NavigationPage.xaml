@@ -5,6 +5,7 @@
     xmlns:local="using:MobileCarMarket"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:MobileCarMarket.ViewModels"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -63,7 +64,7 @@
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Margin="5"
-                Click="TakePhoto" />
+                Command="{Binding ContentViewModel.TakePhoto}" />
         </Grid>
     </Grid>
 </Page>

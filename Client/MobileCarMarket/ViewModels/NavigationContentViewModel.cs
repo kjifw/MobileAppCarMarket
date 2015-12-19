@@ -1,7 +1,14 @@
 ﻿namespace MobileCarMarket.ViewModels
 {
-    using Helpers;
+    using System;
     using System.Windows.Input;
+
+    using SQLite.Net.Cipher.Interfaces;
+
+    using Helpers;
+    using LocalDb;
+    using LocalDb.Models;
+    using Device;
 
     public class NavigationContentViewModel : ViewModelBase, IContentViewModel
     {
@@ -19,7 +26,7 @@
                 {
                     this.searchCommand = new DelegateCommand(() =>
                     {
-
+                        new NavigationService().Navigate(typeof(SearchPage));
                     });
                 }
 
@@ -35,7 +42,7 @@
                 {
                     this.publishCommand = new DelegateCommand(() =>
                     {
-
+                        new NavigationService().Navigate(typeof(PublishPage));
                     });
                 }
 
@@ -51,7 +58,7 @@
                 {
                     this.favouritesCommand = new DelegateCommand(() =>
                     {
-
+                        new NavigationService().Navigate(typeof(FavouritesPage));
                     });
                 }
 
@@ -67,7 +74,7 @@
                 {
                     this.viewMyAdsCommand = new DelegateCommand(() =>
                     {
-
+                        new NavigationService().Navigate(typeof(MyAdsPage));
                     });
                 }
 
@@ -81,9 +88,40 @@
             {
                 if (this.takePhoto == null)
                 {
-                    this.takePhoto = new DelegateCommand(() =>
+                    this.takePhoto = new DelegateCommand(async () =>
                     {
+                        var geolocation = new Geolocation();
+                        var isGeolocatorAllowed = await geolocation.IsGeolocatorAllowed();
 
+                        if (isGeolocatorAllowed == false)
+                        {
+                            MessageBox.Show("Please allow geolocation service to be able to capture photo");
+                            return;
+                        }
+
+                        try
+                        {
+                            var camera = new Camera();
+                            var imageBlob = await camera.CapturePhotoAsBinaryBlob();
+                            var coordinates = await geolocation.GetCoordinates();
+
+                            using (ISecureDatabase storage = LocalStorage.GetInstance)
+                            {
+                                var photo = new Photo()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    Data = imageBlob,
+                                    Latitude = coordinates.Latitude,
+                                    Longitude = coordinates.Longitude
+                                };
+
+                                storage.SecureInsert<Photo>(photo, LocalStorage.KeySeed);
+                            }
+                        }   
+                        catch
+                        {
+                            MessageBox.Show("Failed to capture photo, please check your camera and geolocator");
+                        }
                     });
                 }
 

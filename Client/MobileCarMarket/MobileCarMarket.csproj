@@ -98,9 +98,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Device\Camera.cs" />
+    <Compile Include="Device\Coordinates.cs" />
+    <Compile Include="Device\Geolocation.cs" />
     <Compile Include="FavouritesPage.xaml.cs">
       <DependentUpon>FavouritesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CryptoUtils.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Helpers\DelegateCommandWithParameter.cs" />
     <Compile Include="Helpers\INavigationService.cs" />
@@ -108,6 +112,9 @@
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Http\HttpAuth.cs" />
     <Compile Include="Http\HttpResult.cs" />
+    <Compile Include="LocalDb\LocalStorage.cs" />
+    <Compile Include="LocalDb\Models\Photo.cs" />
+    <Compile Include="LocalDb\SQLiteStorage.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -195,6 +202,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Microsoft.VCLibs, Version=14.0">
+      <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
+    </SDKReference>
+    <SDKReference Include="SQLite.UAP.2015, Version=3.9.2">
+      <Name>SQLite for Universal App Platform</Name>
+    </SDKReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
