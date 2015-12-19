@@ -23,7 +23,7 @@
                     {
                         if (model.Email.Length == 0)
                         {
-                            Notification.Publish("Please input username.");
+                            Notification.Publish("Please input email.");
                             return;
                         }
 
@@ -38,7 +38,7 @@
 
                         if (authResult.Succeeded == false)
                         {
-                            Notification.Publish("Incorrect username or password.");
+                            Notification.Publish("Incorrect email or password.");
                             return;
                         }
 

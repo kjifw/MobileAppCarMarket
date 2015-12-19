@@ -19,7 +19,7 @@
                     {
                         if (model.Email.Length == 0)
                         {
-                            Notification.Publish("Please input username.");
+                            Notification.Publish("Please input email.");
                             return;
                         }
 

@@ -38,7 +38,7 @@
             </Grid.RowDefinitions>
             <TextBox Name="usernameTextBox" 
                  Text="{Binding Email, Mode=TwoWay}" 
-                 PlaceholderText="Username"
+                 PlaceholderText="Email"
                  Grid.Row="0" Grid.Column="1" 
                  Margin="0, 0, 0, 5" />
 
