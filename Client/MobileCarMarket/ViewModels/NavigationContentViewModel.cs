@@ -95,7 +95,7 @@
 
                         if (isGeolocatorAllowed == false)
                         {
-                            MessageBox.Show("Please allow geolocation service to be able to capture photo");
+                            Notification.Publish("Please allow geolocation service to be able to capture photo.");
                             return;
                         }
 
@@ -117,10 +117,10 @@
 
                                 storage.SecureInsert<Photo>(photo, LocalStorage.KeySeed);
                             }
-                        }   
+                        }
                         catch
                         {
-                            MessageBox.Show("Failed to capture photo, please check your camera and geolocator");
+                            Notification.Publish("Failed to capture photo, please check your camera and geolocator.");
                         }
                     });
                 }

@@ -39,18 +39,22 @@
                 <RowDefinition MaxHeight="50"/>
                 <RowDefinition MaxHeight="50"/>
             </Grid.RowDefinitions>
-            <ComboBox Name="Manufacturer" 
+            <ComboBox Name="ManufacturerBox" 
                       Grid.Row="0"
                       PlaceholderText="Select Manufacturer"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
-                      Margin="5"/>
+                      Margin="5"
+                      ItemsSource="{Binding Manufacturer.Name}"/>
             <ComboBox Name="Model"
                       Grid.Row="1"
                       PlaceholderText="Select Model"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
-                      Margin="5"/>
+                      Margin="5"
+                      ItemsSource="{Binding ElementName=ManufacturerBox,
+                                            Mode=TwoWay,
+                                            Path=SelectedItem.Models}"/>
             <TextBox Name="Price"
                      Grid.Row="2"
                      PlaceholderText="Enter Price"

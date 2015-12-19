@@ -17,40 +17,40 @@
                 {
                     this.signUpCommand = new DelegateCommandWithParameter<RegistrationViewModel>(async (model) =>
                     {
-                        if(model.Email.Length == 0)
+                        if (model.Email.Length == 0)
                         {
-                            MessageBox.Show("Blank email");
+                            Notification.Publish("Please input username.");
                             return;
                         }
 
-                        if(model.Password.Length == 0)
+                        if (model.Password.Length == 0)
                         {
-                            MessageBox.Show("Blank password");
+                            Notification.Publish("Please input password.");
                             return;
                         }
 
-                        if(model.ConfirmPassword.Length == 0)
+                        if (model.ConfirmPassword.Length == 0)
                         {
-                            MessageBox.Show("Blank confirm password");
+                            Notification.Publish("Please confirm your password.");
                             return;
                         }
 
-                        if(model.Password != model.ConfirmPassword)
+                        if (model.Password != model.ConfirmPassword)
                         {
-                            MessageBox.Show("Password and confirm password does not match");
+                            Notification.Publish("Password and confirm password do not match.");
                             return;
                         }
 
                         var httpAuth = new HttpAuth("http://localhost:60178/api/account/register");
                         var authResult = await httpAuth.Register(model.Email, model.Password, model.ConfirmPassword);
-                        
-                        if(authResult.Succeeded == false)
+
+                        if (authResult.Succeeded == false)
                         {
-                            MessageBox.Show("Error. Email is probably already registered");
+                            Notification.Publish("Error. Email is already registered.");
                             return;
                         }
 
-                        MessageBox.Show("Account successfully registered");
+                        Notification.Publish("Account successfully registered.");
                         new NavigationService().Navigate(typeof(MainPage));
                     });
                 }

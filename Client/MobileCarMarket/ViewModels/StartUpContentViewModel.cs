@@ -21,24 +21,24 @@
                 {
                     this.signInCommand = new DelegateCommandWithParameter<StartUpViewModel>(async (model) =>
                     {
-                        if(model.Email.Length == 0)
+                        if (model.Email.Length == 0)
                         {
-                            MessageBox.Show("Blank email");
+                            Notification.Publish("Please input username.");
                             return;
                         }
 
                         if (model.Password.Length == 0)
                         {
-                            MessageBox.Show("Blank password");
+                            Notification.Publish("Please input password.");
                             return;
                         }
 
                         var httpAuth = new HttpAuth("http://localhost:60178/token");
                         var authResult = await httpAuth.Login(model.Email, model.Password);
 
-                        if(authResult.Succeeded == false)
+                        if (authResult.Succeeded == false)
                         {
-                            MessageBox.Show("Wrong username or password");
+                            Notification.Publish("Incorrect username or password.");
                             return;
                         }
 

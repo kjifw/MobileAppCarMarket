@@ -1,4 +1,6 @@
-﻿namespace MobileCarMarket.ViewModels
+﻿using MobileCarMarket.Helpers;
+
+namespace MobileCarMarket.ViewModels
 {
 
     public class SearchViewModel : ViewModelBase

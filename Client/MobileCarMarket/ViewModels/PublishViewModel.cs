@@ -1,5 +1,6 @@
 ﻿namespace MobileCarMarket.ViewModels
 {
+    using Helpers;
     using System;
     using System.Collections.Generic;
 
@@ -33,13 +34,5 @@
         public bool Used { get; set; }
 
         public Uri ImageUrl { get; set; }
-    }
-
-
-    public class Manufacturer
-    {
-        public string Name { get; set; }
-
-        public ICollection<string> Models { get; set; }
     }
 }

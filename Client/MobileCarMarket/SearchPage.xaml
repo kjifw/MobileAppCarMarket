@@ -23,22 +23,27 @@
                    HorizontalAlignment="Center"
                    FontSize="30"/>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" DataContext="{StaticResource SearchData}">
             <Grid.RowDefinitions>
                 <RowDefinition MaxHeight="50"/>
                 <RowDefinition MaxHeight="50"/>
                 <RowDefinition MaxHeight="50"/>
             </Grid.RowDefinitions>
-            <ComboBox HorizontalAlignment="Stretch"
+            <ComboBox Name="ManufacturerBox" 
+                  HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                   Grid.Row="0"
                   Margin="5"
-                  PlaceholderText="Select Manufacturer"/>
+                  PlaceholderText="Select Manufacturer"
+                  ItemsSource="{Binding Manufacturer.Name}"/>
             <ComboBox HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                   Grid.Row="1"
                   Margin="5"
-                  PlaceholderText="Select Model"/>
+                  PlaceholderText="Select Model"
+                  ItemsSource="{Binding ElementName=ManufacturerBox,
+                                        Mode=TwoWay,
+                                        Path=SelectedItem.Models}"/>
             <CheckBox Name="IsUsed"
                   Content="Used"
                   Grid.Row="2"
