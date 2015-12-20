@@ -29,19 +29,19 @@
                 <RowDefinition MaxHeight="50"/>
                 <RowDefinition MaxHeight="50"/>
             </Grid.RowDefinitions>
-            <ComboBox Name="ManufacturerBox" 
+            <ComboBox Name="ManufacturersBox" 
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                   Grid.Row="0"
                   Margin="5"
                   PlaceholderText="Select Manufacturer"
-                  ItemsSource="{Binding Manufacturer.Name}"/>
+                  ItemsSource="{Binding Manufacturers.Name}"/>
             <ComboBox HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                   Grid.Row="1"
                   Margin="5"
                   PlaceholderText="Select Model"
-                  ItemsSource="{Binding ElementName=ManufacturerBox,
+                  ItemsSource="{Binding ElementName=ManufacturersBox,
                                         Mode=TwoWay,
                                         Path=SelectedItem.Models}"/>
             <CheckBox Name="IsUsed"
