@@ -9,6 +9,7 @@
     using LocalDb;
     using LocalDb.Models;
     using Device;
+    using System.Threading.Tasks;
 
     public class NavigationContentViewModel : ViewModelBase, IContentViewModel
     {
@@ -95,7 +96,7 @@
 
                         if (isGeolocatorAllowed == false)
                         {
-                            Notification.Publish("Please allow geolocation service to be able to capture photo.");
+                            Notification.Publish("Please allow geolocation service to be able to capture photo");
                             return;
                         }
 
@@ -115,12 +116,14 @@
                                     Longitude = coordinates.Longitude
                                 };
 
-                                storage.SecureInsert<Photo>(photo, LocalStorage.KeySeed);
+                                await new Task<int>(() => {
+                                    return storage.SecureInsert<Photo>(photo, LocalStorage.KeySeed);
+                                });
                             }
-                        }
+                        }   
                         catch
                         {
-                            Notification.Publish("Failed to capture photo, please check your camera and geolocator.");
+                            MessageBox.Show("Failed to capture photo, please check your camera and geolocator");
                         }
                     });
                 }

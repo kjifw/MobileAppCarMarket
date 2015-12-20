@@ -3,6 +3,7 @@
     using Windows.UI.Xaml.Controls;
 
     using ViewModels;
+    using Helpers;
 
     public sealed partial class MainPage : Page
     {
@@ -16,7 +17,7 @@
 
         private void navigateToNavigationPage_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(NavigationPage));
+            new NavigationService().Navigate(typeof(NavigationPage));
         }
     }
 }

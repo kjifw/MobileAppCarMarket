@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MobileCarMarket.ViewModels
+﻿namespace MobileCarMarket.ViewModels
 {
     public class SearchResult
     {

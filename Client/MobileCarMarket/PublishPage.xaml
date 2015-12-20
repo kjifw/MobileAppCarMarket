@@ -6,13 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:MobileCarMarket.ViewModels"
+    Name="pageMain"
     mc:Ignorable="d">
 
     <Page.Resources>
-        <DataTemplate x:Key="MyItemDataTemplate" x:DataType="local:MyItem">
-            <TextBlock Text="{Binding Text}" />
+        <DataTemplate x:Key="ListedImageDataTemplate" x:DataType="viewModels:ImageView">
+            <Image Width="50" Height="50" Source="{Binding Source, Mode=TwoWay}" />
+        </DataTemplate>
+        <DataTemplate x:Key="ListedManufacturerDataTemplate" x:DataType="viewModels:Manufacturer">
+            <ComboBoxItem Content="{Binding Name, Mode=TwoWay}" />
         </DataTemplate>
     </Page.Resources>
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="80"/>
@@ -21,6 +26,7 @@
             <RowDefinition MaxHeight="50"/>
             <RowDefinition MaxHeight="50"/>
         </Grid.RowDefinitions>
+
         <Grid.Resources>
             <viewModels:PublishViewModel x:Key="DataToPublish" />
         </Grid.Resources>
@@ -30,7 +36,6 @@
                    Grid.ColumnSpan="3"
                    HorizontalAlignment="Center"
                    FontSize="30"/>
-
         <Grid Grid.Row="1" Grid.Column="0" DataContext="{StaticResource DataToPublish}">
             <Grid.RowDefinitions>
                 <RowDefinition MaxHeight="50"/>
@@ -39,29 +44,32 @@
                 <RowDefinition MaxHeight="50"/>
                 <RowDefinition MaxHeight="50"/>
             </Grid.RowDefinitions>
-            <ComboBox Name="ManufacturerBox" 
+            <ComboBox Name="Manufacturer" 
                       Grid.Row="0"
                       PlaceholderText="Select Manufacturer"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       Margin="5"
-                      ItemsSource="{Binding Manufacturer.Name}"/>
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding Path=Manufacturer, Mode=TwoWay}"
+                      ItemsSource="{Binding ElementName=pageMain, Path=DataContext.ContentViewModel.Manufacturers}"
+                      />
             <ComboBox Name="Model"
                       Grid.Row="1"
                       PlaceholderText="Select Model"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       Margin="5"
-                      ItemsSource="{Binding ElementName=ManufacturerBox,
-                                            Mode=TwoWay,
-                                            Path=SelectedItem.Models}"/>
+                      SelectedItem="{Binding Path=Model, Mode=TwoWay}"
+                      ItemsSource="{Binding ElementName=Manufacturer, Path=SelectedItem.Models, UpdateSourceTrigger=PropertyChanged}"
+                      />
             <TextBox Name="Price"
                      Grid.Row="2"
                      PlaceholderText="Enter Price"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
                      Margin="5"
-                     Text="{Binding Price}"/>
+                     Text="{Binding Price, Mode=TwoWay}"/>
             <TextBox Name="Description"
                      Grid.Row="3"
                      PlaceholderText="Enter description"
@@ -69,23 +77,24 @@
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
                      Margin="5" 
-                     Text="{Binding Description}" />
+                     Text="{Binding Description, Mode=TwoWay}" />
             <CheckBox Name="IsNew"
                       Grid.Row="4" 
                       Content="New"
                       Margin="5"
-                      IsChecked="{Binding IsNew}"/>
+                      IsChecked="{Binding IsNew, Mode=TwoWay}"/>
         </Grid>
 
-        <ListView Name="listViewUploadImages" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+        <ListView Name="ImagesForPublishingListView" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled"
                 ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.ZoomMode="Disabled"
+                Background="WhiteSmoke"
                 AllowDrop="True" SelectionMode="Extended"
-                DragOver="listViewUploadImages_DragOver"
-                Drop="listViewUploadImages_Drop" 
+                DragOver="ImagesForPublishingListView_DragOver"
+                Drop="ImagesForPublishingListView_Drop" 
                 CanDragItems="True" 
-                DragItemsStarting="listViewUploadImages_DragItemsStarting"
-                ItemTemplate="{StaticResource MyItemDataTemplate}"
-                ItemsSource="{x:Bind MyItems}">
+                DragItemsStarting="ImagesForPublishingListView_DragItemsStarting"
+                ItemTemplate="{StaticResource ListedImageDataTemplate}"
+                ItemsSource="{Binding Path=ContentViewModel.ImagesForPublishing}">
 
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -93,16 +102,17 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
-        
-        <ListView Name="listViewAllImages" Grid.Row="3" Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+
+        <ListView Name="CapturedImagesListView" Grid.Row="3" Margin="0, 5, 0, 5" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled"
                 ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.ZoomMode="Disabled"
+                Background="WhiteSmoke"
                 AllowDrop="True" SelectionMode="Extended"
-                DragOver="listViewAllImages_DragOver"
-                Drop="listViewAllImages_Drop" 
+                DragOver="CapturedImagesListView_DragOver"
+                Drop="CapturedImagesListView_Drop" 
                 CanDragItems="True" 
-                DragItemsStarting="listViewAllImages_DragItemsStarting" 
-                ItemTemplate="{StaticResource MyItemDataTemplate}"
-                ItemsSource="{x:Bind MyItemsTwo}">
+                DragItemsStarting="CapturedImagesListView_DragItemsStarting" 
+                ItemTemplate="{StaticResource ListedImageDataTemplate}"
+                ItemsSource="{Binding Path=ContentViewModel.CapturedImages}">
 
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>

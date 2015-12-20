@@ -1,48 +1,38 @@
-﻿using MobileCarMarket.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Storage;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace MobileCarMarket
+﻿namespace MobileCarMarket
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using Windows.ApplicationModel.DataTransfer;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Navigation;
+
+    using ViewModels;
+    using Helpers;
+
     public sealed partial class PublishPage : Page
     {
+        private PublishContentViewModel contentViewModel;
+
         public PublishPage()
         {
             this.InitializeComponent();
 
             var contentViewModel = new PublishContentViewModel();
-
             this.DataContext = new MainPageViewModel(contentViewModel);
-
-            this.MyItems.Add(new MyItem() { Id = Guid.NewGuid(), Text = "Muhahah" });
-            this.MyItemsTwo.Add(new MyItem() { Id = Guid.NewGuid(), Text = "Not so funny" });
+            this.contentViewModel = contentViewModel;
+            contentViewModel.Manufacturers = StaticResources.GetManufacturers();
         }
 
-        public ObservableCollection<MyItem> MyItems { get; private set; } = new ObservableCollection<MyItem>();
-        public ObservableCollection<MyItem> MyItemsTwo { get; private set; } = new ObservableCollection<MyItem>();
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
 
-        private void listViewAllImages_DragOver(object sender, DragEventArgs e)
+            await ((this.DataContext as MainPageViewModel).ContentViewModel as PublishContentViewModel).LoadCapturedImages();
+        }
+
+        private void ImagesForPublishingListView_DragOver(object sender, DragEventArgs e)
         {
             if (e.DataView.Contains(StandardDataFormats.Text))
             {
@@ -50,7 +40,7 @@ namespace MobileCarMarket
             }
         }
 
-        private async void listViewAllImages_Drop(object sender, DragEventArgs e)
+        private async void ImagesForPublishingListView_Drop(object sender, DragEventArgs e)
         {
             if (e.DataView.Contains(StandardDataFormats.Text))
             {
@@ -58,32 +48,32 @@ namespace MobileCarMarket
                 var itemIdsToMove = id.Split(',');
 
                 var destinationListView = sender as ListView;
-                var listViewItemsSource = destinationListView?.ItemsSource as ObservableCollection<MyItem>;
+                var listViewItemsSource = destinationListView?.ItemsSource as ObservableCollection<ImageView>;
 
                 if (listViewItemsSource != null)
                 {
                     foreach (var itemId in itemIdsToMove)
                     {
-                        var itemToMove = this.MyItems.FirstOrDefault(i => i.Id.ToString() == itemId);
+                        var itemToMove = this.contentViewModel.CapturedImages.FirstOrDefault(i => i.Id.ToString() == itemId);
 
                         if (itemToMove != null)
                         {
                             listViewItemsSource.Add(itemToMove);
-                            this.MyItems.Remove(itemToMove);
+                            this.contentViewModel.CapturedImages.Remove(itemToMove);
                         }
                     }
                 }
             }
         }
 
-        private void listViewAllImages_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
+        private void ImagesForPublishingListView_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
         {
-            var items = string.Join(",", e.Items.Cast<MyItem>().Select(i => i.Id));
+            var items = string.Join(",", e.Items.Cast<ImageView>().Select(i => i.Id));
             e.Data.SetText(items);
             e.Data.RequestedOperation = DataPackageOperation.Move;
         }
 
-        private void listViewUploadImages_DragOver(object sender, DragEventArgs e)
+        private void CapturedImagesListView_DragOver(object sender, DragEventArgs e)
         {
             if (e.DataView.Contains(StandardDataFormats.Text))
             {
@@ -91,7 +81,7 @@ namespace MobileCarMarket
             }
         }
 
-        private async void listViewUploadImages_Drop(object sender, DragEventArgs e)
+        private async void CapturedImagesListView_Drop(object sender, DragEventArgs e)
         {
             if (e.DataView.Contains(StandardDataFormats.Text))
             {
@@ -99,27 +89,27 @@ namespace MobileCarMarket
                 var itemIdsToMove = id.Split(',');
 
                 var destinationListView = sender as ListView;
-                var listViewItemsSource = destinationListView?.ItemsSource as ObservableCollection<MyItem>;
+                var listViewItemsSource = destinationListView?.ItemsSource as ObservableCollection<ImageView>;
 
                 if (listViewItemsSource != null)
                 {
                     foreach (var itemId in itemIdsToMove)
                     {
-                        var itemToMove = this.MyItemsTwo.FirstOrDefault(i => i.Id.ToString() == itemId);
+                        var itemToMove = this.contentViewModel.ImagesForPublishing.FirstOrDefault(i => i.Id.ToString() == itemId);
 
                         if (itemToMove != null)
                         {
                             listViewItemsSource.Add(itemToMove);
-                            this.MyItemsTwo.Remove(itemToMove);
+                            this.contentViewModel.ImagesForPublishing.Remove(itemToMove);
                         }
                     }
                 }
             }
         }
 
-        private void listViewUploadImages_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
+        private void CapturedImagesListView_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
         {
-            var items = string.Join(",", e.Items.Cast<MyItem>().Select(i => i.Id));
+            var items = string.Join(",", e.Items.Cast<ImageView>().Select(i => i.Id));
             e.Data.SetText(items);
             e.Data.RequestedOperation = DataPackageOperation.Move;
         }

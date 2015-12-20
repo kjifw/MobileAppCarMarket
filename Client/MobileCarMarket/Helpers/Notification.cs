@@ -1,9 +1,9 @@
-﻿using System;
-using Windows.Data.Xml.Dom;
-using Windows.UI.Notifications;
-
-namespace MobileCarMarket.Helpers
+﻿namespace MobileCarMarket.Helpers
 {
+    using System;
+    using Windows.Data.Xml.Dom;
+    using Windows.UI.Notifications;
+
     public static class Notification
     {
         public static void Publish(string message, int expiryTime = 20)

@@ -1,7 +1,5 @@
 ﻿namespace MobileCarMarket.LocalDb
 {
-    using System;
-
     using SQLite.Net.Cipher.Data;
     using SQLite.Net.Interop;
 
@@ -24,6 +22,7 @@
         protected override void CreateTables()
         {
             this.CreateTable<Photo>();
+            this.CreateTable<Token>();
         }
     }
 }

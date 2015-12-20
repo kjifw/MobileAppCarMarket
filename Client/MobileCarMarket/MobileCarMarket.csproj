@@ -98,6 +98,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ByteImageConverter.cs" />
     <Compile Include="Device\Camera.cs" />
     <Compile Include="Device\Coordinates.cs" />
     <Compile Include="Device\Geolocation.cs" />
@@ -108,13 +109,16 @@
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Helpers\DelegateCommandWithParameter.cs" />
     <Compile Include="Helpers\INavigationService.cs" />
-    <Compile Include="Helpers\Manufacturer.cs" />
+    <Compile Include="Helpers\MessageBox.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Helpers\Notification.cs" />
+    <Compile Include="Helpers\StaticResources.cs" />
     <Compile Include="Http\HttpAuth.cs" />
+    <Compile Include="Http\HttpDataUploader.cs" />
     <Compile Include="Http\HttpResult.cs" />
     <Compile Include="LocalDb\LocalStorage.cs" />
     <Compile Include="LocalDb\Models\Photo.cs" />
+    <Compile Include="LocalDb\Models\Token.cs" />
     <Compile Include="LocalDb\SQLiteStorage.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -122,7 +126,6 @@
     <Compile Include="MyAdsPage.xaml.cs">
       <DependentUpon>MyAdsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyItem.cs" />
     <Compile Include="NavigationPage.xaml.cs">
       <DependentUpon>NavigationPage.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,8 @@
     <Compile Include="RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RemoteServiceModels\ListedAdvertModel.cs" />
+    <Compile Include="RemoteServiceModels\CreateAdvertModel.cs" />
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
@@ -146,6 +151,7 @@
     <Compile Include="ViewModels\NavigationContentViewModel.cs" />
     <Compile Include="ViewModels\PublishContentViewModel.cs" />
     <Compile Include="ViewModels\PublishViewModel.cs" />
+    <Compile Include="ViewModels\PublishViewModelValidator.cs" />
     <Compile Include="ViewModels\RegistrationContentViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\SearchContentViewModel.cs" />
@@ -153,6 +159,8 @@
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\StartUpContentViewModel.cs" />
     <Compile Include="ViewModels\StartUpViewModel.cs" />
+    <Compile Include="ViewModels\ImageView.cs" />
+    <Compile Include="ViewModels\Manufacturer.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>

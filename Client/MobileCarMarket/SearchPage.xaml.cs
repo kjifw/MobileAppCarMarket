@@ -1,5 +1,4 @@
-﻿using MobileCarMarket.Helpers;
-using MobileCarMarket.ViewModels;
+﻿using MobileCarMarket.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
