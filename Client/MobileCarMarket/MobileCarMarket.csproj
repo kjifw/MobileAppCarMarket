@@ -102,14 +102,10 @@
     <Compile Include="Device\Camera.cs" />
     <Compile Include="Device\Coordinates.cs" />
     <Compile Include="Device\Geolocation.cs" />
-    <Compile Include="FavouritesPage.xaml.cs">
-      <DependentUpon>FavouritesPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\CryptoUtils.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Helpers\DelegateCommandWithParameter.cs" />
     <Compile Include="Helpers\INavigationService.cs" />
-    <Compile Include="Helpers\MessageBox.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Helpers\Notification.cs" />
     <Compile Include="Helpers\StaticResources.cs" />
@@ -184,10 +180,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="FavouritesPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

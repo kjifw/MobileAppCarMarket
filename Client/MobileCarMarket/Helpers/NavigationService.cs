@@ -15,10 +15,5 @@
         {
             ((Frame)Window.Current.Content).Navigate(sourcePageType, parameter);
         }
-
-        public void GoBack()
-        {
-            ((Frame)Window.Current.Content).GoBack();
-        }
     }
 }

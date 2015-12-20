@@ -29,8 +29,7 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-
-            <!-- Button clicks will be replased with command -->
+            
             <Button Content="Search"
                 Grid.Row="0" Grid.Column="0"
                 VerticalAlignment="Stretch"
@@ -45,13 +44,6 @@
                 Margin="5"
                 Click="PublishClick"/>
 
-            <Button Content="Favourites"
-                Grid.Row="1" Grid.Column="0"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                Margin="5"
-                Click="FavouritesClick"/>
-
             <Button Content="MyAds"
                 Grid.Row="1" Grid.Column="1"
                 VerticalAlignment="Stretch"
@@ -60,7 +52,7 @@
                 Click="MyAdsClick"/>
 
             <Button Content="Take Photo"
-                Grid.Row="2" Grid.Column="0"
+                Grid.Row="1" Grid.Column="0"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Margin="5"

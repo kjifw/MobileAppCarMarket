@@ -29,12 +29,12 @@
 
             var imagesCount = storage.SecureGetCount<Photo>();
 
-            if(imagesCount > 0)
+            if (imagesCount > 0)
             {
                 var allImages = storage.SecureGetAll<Photo>(LocalStorage.KeySeed);
                 var convertedAllImages = new ObservableCollection<ImageView>();
 
-                foreach(var image in allImages)
+                foreach (var image in allImages)
                 {
                     var imageView = new ImageView()
                     {
@@ -59,14 +59,14 @@
                     {
                         var isValidModel = PublishViewModelValidator.Validate(model);
 
-                        if(isValidModel == false)
+                        if (isValidModel == false)
                         {
                             return;
                         }
 
-                        if(this.ImagesForPublishing.Count == 0)
+                        if (this.ImagesForPublishing.Count == 0)
                         {
-                            // You can not publish advert without images
+                            Notification.Publish("You can not publish advert without images.");
                             return;
                         }
 
@@ -76,20 +76,23 @@
                         var createAdvertApiUrl = "http://localhost:60178/api/adverts";
                         var advertId = await this.UploadAdvert(createAdvertApiUrl, token.Data, model);
 
-                        if(advertId == null)
+                        if (advertId == null)
                         {
-                            // Failed to publish your advert
+                            Notification.Publish("Failed to publish your advert.");
                             return;
                         }
 
                         var uploadAdvertImageApiUrl = string.Format("{0}{1}", "http://localhost:60178/api/images/", advertId);
                         var areImagesUploaded = await this.UploadImages(uploadAdvertImageApiUrl, token.Data, storage);
 
-                        if(areImagesUploaded == false)
+                        if (areImagesUploaded == false)
                         {
-                            // Failed to publish your advert
+                            Notification.Publish("Failed to publish your advert.");
                             return;
                         }
+
+                        Notification.Publish("Advert published.");
+                        new NavigationService().Navigate(typeof(NavigationPage));
                     });
                 }
 
@@ -199,7 +202,7 @@
                 var imageStream = await ByteImageConverter.ByteToRandomAccessStream(image.Data);
                 var result = await httpImageUploader.UploadImage(imageStream);
 
-                if(result.Succeeded == false)
+                if (result.Succeeded == false)
                 {
                     return false;
                 }
@@ -228,7 +231,7 @@
 
             var response = await httpAdvertUploader.UploadJsonData(createAdvertModelSerialized);
 
-            if(response.Succeeded == false)
+            if (response.Succeeded == false)
             {
                 return null;
             }

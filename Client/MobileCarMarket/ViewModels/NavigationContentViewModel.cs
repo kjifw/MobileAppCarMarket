@@ -15,7 +15,6 @@
     {
         private ICommand searchCommand;
         private ICommand publishCommand;
-        private ICommand favouritesCommand;
         private ICommand viewMyAdsCommand;
         private ICommand takePhoto;
 
@@ -48,22 +47,6 @@
                 }
 
                 return this.publishCommand;
-            }
-        }
-
-        public ICommand FavouritesCommand
-        {
-            get
-            {
-                if (this.favouritesCommand == null)
-                {
-                    this.favouritesCommand = new DelegateCommand(() =>
-                    {
-                        new NavigationService().Navigate(typeof(FavouritesPage));
-                    });
-                }
-
-                return this.favouritesCommand;
             }
         }
 
@@ -116,14 +99,15 @@
                                     Longitude = coordinates.Longitude
                                 };
 
-                                await new Task<int>(() => {
+                                await Task.Factory.StartNew<int>(() =>
+                                {
                                     return storage.SecureInsert<Photo>(photo, LocalStorage.KeySeed);
                                 });
                             }
-                        }   
+                        }
                         catch
                         {
-                            MessageBox.Show("Failed to capture photo, please check your camera and geolocator");
+                            Notification.Publish("Failed to capture photo, please check your camera and geolocator.");
                         }
                     });
                 }
