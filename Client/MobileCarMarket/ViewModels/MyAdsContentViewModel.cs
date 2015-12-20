@@ -1,12 +1,13 @@
 ﻿namespace MobileCarMarket.ViewModels
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
     public class MyAdsContentViewModel : ViewModelBase, IContentViewModel
     {
         private ObservableCollection<MyAdsViewModel> myAdsList;
 
-        public ObservableCollection<MyAdsViewModel> MyAdsList
+        public ICollection<MyAdsViewModel> MyAdsList
         {
             get
             {

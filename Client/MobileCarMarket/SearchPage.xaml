@@ -46,11 +46,11 @@
             <RowDefinition MaxHeight="80"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        
+
         <Grid.Resources>
             <viewModels:SearchViewModel x:Key="SearchData" />
         </Grid.Resources>
-        
+
         <TextBlock Text="{Binding Title}"
                    Grid.Row="0" Grid.Column="0"
                    Grid.ColumnSpan="3"
@@ -80,7 +80,7 @@
                   PlaceholderText="Select Model"
                   SelectedItem="{Binding Path=Model, Mode=TwoWay}"
                   ItemsSource="{Binding ElementName=Manufacturer, Path=SelectedItem.Models, UpdateSourceTrigger=PropertyChanged}"/>
-            
+
             <CheckBox Name="IsNew"
                   Content="New"
                   Grid.Row="2"

@@ -1,15 +1,16 @@
 ﻿namespace MobileCarMarket.ViewModels
 {
-
     public class SearchViewModel : ViewModelBase
     {
         public SearchViewModel()
         {
+
         }
 
         public SearchViewModel(SearchViewModel model)
             : this(model.Manufacturer, model.IsNew)
         {
+
         }
 
         public SearchViewModel(Manufacturer manufacturer, bool isNew)

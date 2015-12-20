@@ -1,6 +1,6 @@
 ﻿namespace MobileCarMarket.ViewModels
 {
-    using MobileCarMarket.Helpers;
+    using Helpers;
 
     public static class PublishViewModelValidator
     {

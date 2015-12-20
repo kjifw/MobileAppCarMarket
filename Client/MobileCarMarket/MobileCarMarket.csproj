@@ -110,6 +110,7 @@
     <Compile Include="Helpers\Notification.cs" />
     <Compile Include="Helpers\StaticResources.cs" />
     <Compile Include="Http\HttpAuth.cs" />
+    <Compile Include="Http\HttpDataDownloader.cs" />
     <Compile Include="Http\HttpDataUploader.cs" />
     <Compile Include="Http\HttpResult.cs" />
     <Compile Include="LocalDb\LocalStorage.cs" />
