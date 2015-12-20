@@ -9,6 +9,7 @@
     {
         private ICommand searchCommand;
         private ObservableCollection<Manufacturer> manufacturers;
+        private ObservableCollection<SearchResult> searchResults;
 
         public ICommand SearchCommand
         {
@@ -48,6 +49,32 @@
                 foreach (var item in value)
                 {
                     this.manufacturers.Add(item);
+                }
+            }
+        }
+
+        public IEnumerable<SearchResult> SearchResults
+        {
+            get
+            {
+                if (this.searchResults == null)
+                {
+                    this.searchResults = new ObservableCollection<SearchResult>();
+                }
+
+                return this.searchResults;
+            }
+            set
+            {
+                if (this.searchResults == null)
+                {
+                    this.searchResults = new ObservableCollection<SearchResult>();
+                }
+
+                this.searchResults.Clear();
+                foreach (var item in value)
+                {
+                    this.searchResults.Add(item);
                 }
             }
         }

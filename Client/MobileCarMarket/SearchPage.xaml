@@ -7,12 +7,40 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels ="using:MobileCarMarket.ViewModels"
     mc:Ignorable="d">
-
+    
+    <Page.Resources>
+        <DataTemplate x:Key="SearchResultTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition MaxHeight="40" />
+                    <RowDefinition MaxHeight="40" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MaxWidth="80"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding ImageUrl}" 
+                               Width="80"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Grid.RowSpan="2"/>
+                <TextBlock Text="{Binding Manufacturer}" 
+                                   Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="{Binding Model}"
+                                   Grid.Row="0" Grid.Column="2"/>
+                <TextBlock Text="{Binding Price}"
+                                   Grid.Row="1" Grid.Column="2"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="80"/>
             <RowDefinition MaxHeight="160" />
             <RowDefinition MaxHeight="80"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.Resources>
             <viewModels:SearchViewModel x:Key="SearchData" />
@@ -35,7 +63,7 @@
                   Grid.Row="0"
                   Margin="5"
                   PlaceholderText="Select Manufacturer"
-                  ItemsSource="{Binding Manufacturers.Name}"/>
+                  ItemsSource="{Binding Manufacturers}"/>
             <ComboBox HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                   Grid.Row="1"
@@ -57,5 +85,9 @@
                 Margin="5" 
                 CommandParameter="{StaticResource SearchData}"
                 Command="{Binding ContentViewModel.SearchCommand}"/>
+        <ListBox Name="SearchResults" 
+                 ItemsSource="{Binding ContentViewModel.SearchResults}"
+                 ItemTemplate="{StaticResource SearchResultTemplate}"
+                 Grid.Row="3"/>
     </Grid>
 </Page>

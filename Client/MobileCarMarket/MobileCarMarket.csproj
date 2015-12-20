@@ -149,6 +149,7 @@
     <Compile Include="ViewModels\RegistrationContentViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\SearchContentViewModel.cs" />
+    <Compile Include="ViewModels\SearchResult.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\StartUpContentViewModel.cs" />
     <Compile Include="ViewModels\StartUpViewModel.cs" />
