@@ -5,7 +5,8 @@
     xmlns:local="using:MobileCarMarket"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels ="using:MobileCarMarket.ViewModels"
+    xmlns:viewModels ="using:MobileCarMarket.ViewModels"    
+    Name="pageSearch"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -33,6 +34,9 @@
                                    Grid.Row="1" Grid.Column="2"/>
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="ListedManufacturerDataTemplate" x:DataType="viewModels:Manufacturer">
+            <ComboBoxItem Content="{Binding Name, Mode=TwoWay}" />
+        </DataTemplate>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -42,38 +46,43 @@
             <RowDefinition MaxHeight="80"/>
             <RowDefinition />
         </Grid.RowDefinitions>
+        
         <Grid.Resources>
             <viewModels:SearchViewModel x:Key="SearchData" />
         </Grid.Resources>
+        
         <TextBlock Text="{Binding Title}"
                    Grid.Row="0" Grid.Column="0"
                    Grid.ColumnSpan="3"
                    HorizontalAlignment="Center"
                    FontSize="30"/>
 
-        <Grid Grid.Row="1" DataContext="{StaticResource SearchData}">
+        <Grid Grid.Row="1" Grid.Column="0" DataContext="{StaticResource SearchData}">
             <Grid.RowDefinitions>
                 <RowDefinition MaxHeight="50"/>
                 <RowDefinition MaxHeight="50"/>
                 <RowDefinition MaxHeight="50"/>
             </Grid.RowDefinitions>
-            <ComboBox Name="ManufacturersBox" 
+            <ComboBox Name="Manufacturer" 
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                   Grid.Row="0"
                   Margin="5"
                   PlaceholderText="Select Manufacturer"
-                  ItemsSource="{Binding Manufacturers}"/>
+                  DisplayMemberPath="Name"                 
+                  SelectedItem="{Binding Path=Manufacturer, Mode=TwoWay}"
+                  ItemsSource="{Binding ElementName=pageSearch, Path=DataContext.ContentViewModel.Manufacturers}"/>
+
             <ComboBox HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
                   Grid.Row="1"
                   Margin="5"
                   PlaceholderText="Select Model"
-                  ItemsSource="{Binding ElementName=ManufacturersBox,
-                                        Mode=TwoWay,
-                                        Path=SelectedItem.Models}"/>
-            <CheckBox Name="IsUsed"
-                  Content="Used"
+                  SelectedItem="{Binding Path=Model, Mode=TwoWay}"
+                  ItemsSource="{Binding ElementName=Manufacturer, Path=SelectedItem.Models, UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <CheckBox Name="IsNew"
+                  Content="New"
                   Grid.Row="2"
                   Margin="5" 
                   IsChecked="{Binding Used}"/>

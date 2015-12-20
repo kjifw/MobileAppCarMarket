@@ -1,30 +1,32 @@
 ﻿namespace MobileCarMarket.ViewModels
 {
+    using MobileCarMarket.Helpers;
+
     public static class PublishViewModelValidator
     {
         public static bool Validate(PublishViewModel model)
         {
-            if(model.Manufacturer == null)
+            if (model.Manufacturer == null)
             {
-                // Please select manufacturer
+                Notification.Publish("Please select manufacturer.");
                 return false;
             }
 
-            if(model.Model == null)
+            if (model.Model == null)
             {
-                // Please select model
+                Notification.Publish("Please select model.");
                 return false;
             }
 
-            if(model.Description == null)
+            if (model.Description == null)
             {
-                // Please fill description
+                Notification.Publish("Please fill description.");
                 return false;
             }
 
-            if(model.Price == 0)
+            if (model.Price == 0)
             {
-                // Please fill price
+                Notification.Publish("Please fill price.");
                 return false;
             }
 

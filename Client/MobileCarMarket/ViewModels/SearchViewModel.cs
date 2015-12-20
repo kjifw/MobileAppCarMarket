@@ -8,18 +8,18 @@
         }
 
         public SearchViewModel(SearchViewModel model)
-            : this(model.Manufacturer, model.Used)
+            : this(model.Manufacturer, model.IsNew)
         {
         }
 
-        public SearchViewModel(Manufacturer manufacturer, bool used)
+        public SearchViewModel(Manufacturer manufacturer, bool isNew)
         {
             this.Manufacturer = manufacturer;
-            this.Used = used;
+            this.IsNew = isNew;
         }
 
         public Manufacturer Manufacturer { get; set; }
 
-        public bool Used { get; set; }
+        public bool IsNew { get; set; }
     }
 }

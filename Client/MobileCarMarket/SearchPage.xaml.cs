@@ -3,6 +3,8 @@
     using MobileCarMarket.ViewModels;
     using Windows.UI.Xaml.Controls;
 
+    using Helpers;
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -15,6 +17,7 @@
             var contentViewModel = new SearchContentViewModel();
 
             this.DataContext = new MainPageViewModel(contentViewModel);
+            contentViewModel.Manufacturers = StaticResources.GetManufacturers();
         }
     }
 }
