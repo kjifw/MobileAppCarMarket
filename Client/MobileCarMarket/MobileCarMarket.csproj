@@ -102,6 +102,8 @@
     <Compile Include="Device\Camera.cs" />
     <Compile Include="Device\Coordinates.cs" />
     <Compile Include="Device\Geolocation.cs" />
+    <Compile Include="Gestures\ManipulationCompletedHandler.cs" />
+    <Compile Include="Gestures\ManipulationDeltaHandler.cs" />
     <Compile Include="Helpers\CryptoUtils.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Helpers\DelegateCommandWithParameter.cs" />
@@ -147,6 +149,7 @@
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\NavigationContentViewModel.cs" />
+    <Compile Include="ViewModels\NavigationModel.cs" />
     <Compile Include="ViewModels\PublishContentViewModel.cs" />
     <Compile Include="ViewModels\PublishViewModel.cs" />
     <Compile Include="ViewModels\PublishViewModelValidator.cs" />

@@ -72,6 +72,7 @@
                             return;
                         }
 
+                        this.isSigningUp = false;
                         Notification.Publish("Account successfully registered");
                         new NavigationService().Navigate(typeof(MainPage));
                     });

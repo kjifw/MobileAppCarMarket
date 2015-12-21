@@ -79,6 +79,7 @@
 
                         storage.SecureInsert<Token>(token, LocalStorage.KeySeed);
 
+                        this.isSigningIn = false;
                         new NavigationService().Navigate(typeof(NavigationPage));
                     });
                 }

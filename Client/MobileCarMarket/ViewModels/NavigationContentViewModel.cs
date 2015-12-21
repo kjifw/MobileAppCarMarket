@@ -2,6 +2,7 @@
 {
     using System;
     using System.Windows.Input;
+    using System.Threading.Tasks;
 
     using SQLite.Net.Cipher.Interfaces;
 
@@ -9,15 +10,15 @@
     using LocalDb;
     using LocalDb.Models;
     using Device;
-    using System.Threading.Tasks;
+    
 
     public class NavigationContentViewModel : ViewModelBase, IContentViewModel
     {
         private ICommand searchCommand;
         private ICommand publishCommand;
         private ICommand viewMyAdsCommand;
-        private ICommand signOutCommand;
         private ICommand takePhoto;
+        private ICommand signOutCommand;
 
         public ICommand SearchCommand
         {
@@ -81,6 +82,8 @@
                             .SecureGetAll<Token>(LocalStorage.KeySeed)[storage.SecureGetCount<Token>() - 1];
 
                         storage.SecureDelete<Token>(token.Id);
+
+                        LocalStorage.Uninitialize();
 
                         new NavigationService().Navigate(typeof(MainPage));
                     });

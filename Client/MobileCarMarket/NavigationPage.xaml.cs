@@ -1,14 +1,19 @@
 ﻿namespace MobileCarMarket
 {
-    using MobileCarMarket.ViewModels;
-    using Windows.UI.Xaml;
+    using System;
     using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
 
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    using ViewModels;
+    using Gestures;
+   
     public sealed partial class NavigationPage : Page
     {
+        private bool swipeLeft;
+        private bool swipeRight;
+        private Type swipeLeftPage = null;
+        private Type swipeRightPage = typeof(MyAdsPage);
+
         public NavigationPage()
         {
             this.InitializeComponent();
@@ -17,24 +22,14 @@
             this.DataContext = new MainPageViewModel(contentViewModel);
         }
 
-        private void PublishClick(object sender, RoutedEventArgs e)
+        private void Page_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(PublishPage));
+            new ManipulationCompletedHandler().Execute(ref this.swipeLeft, ref this.swipeRight, this.swipeLeftPage, this.swipeRightPage, e);
         }
 
-        private void MyAdsClick(object sender, RoutedEventArgs e)
+        private void Page_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(MyAdsPage));
-        }
-
-        private void SearchClick(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(SearchPage));
-        }
-
-        private void TakePhoto(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(SearchPage));
+            new ManipulationDeltaHandler().Execute(sender, e, ref this.swipeLeft, ref this.swipeRight);
         }
     }
 }

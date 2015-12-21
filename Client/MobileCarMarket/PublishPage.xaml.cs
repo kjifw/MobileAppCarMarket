@@ -7,13 +7,19 @@
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Navigation;
+    using Windows.UI.Xaml.Input;
 
     using ViewModels;
     using Helpers;
+    using Gestures;
 
     public sealed partial class PublishPage : Page
     {
         private PublishContentViewModel contentViewModel;
+        private bool swipeLeft;
+        private bool swipeRight;
+        private Type swipeLeftPage = typeof(NavigationPage);
+        private Type swipeRightPage = null;
 
         public PublishPage()
         {
@@ -23,6 +29,16 @@
             this.DataContext = new MainPageViewModel(contentViewModel);
             this.contentViewModel = contentViewModel;
             contentViewModel.Manufacturers = StaticResources.GetManufacturers();
+        }
+
+        private void Page_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            new ManipulationCompletedHandler().Execute(ref this.swipeLeft, ref this.swipeRight, this.swipeLeftPage, this.swipeRightPage, e);
+        }
+
+        private void Page_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            new ManipulationDeltaHandler().Execute(sender, e, ref this.swipeLeft, ref this.swipeRight);
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

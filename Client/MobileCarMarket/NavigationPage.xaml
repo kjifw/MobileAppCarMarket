@@ -6,7 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:MobileCarMarket.ViewModels"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    ManipulationMode="All"
+    ManipulationDelta="Page_ManipulationDelta"
+    ManipulationCompleted="Page_ManipulationCompleted">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -35,21 +38,21 @@
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Margin="5"
-                Click="SearchClick"/>
+                Command="{Binding ContentViewModel.SearchCommand}"/>
 
             <Button Content="Publish"
                 Grid.Row="0" Grid.Column="1"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Margin="5"
-                Click="PublishClick"/>
+                Command="{Binding ContentViewModel.PublishCommand}"/>
 
             <Button Content="MyAds"
                 Grid.Row="1" Grid.Column="1"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Margin="5"
-                Click="MyAdsClick"/>
+                Command="{Binding ContentViewModel.ViewMyAdsCommand}"/>
 
             <Button Content="Take Photo"
                 Grid.Row="1" Grid.Column="0"
@@ -57,13 +60,13 @@
                 HorizontalAlignment="Stretch"
                 Margin="5"
                 Command="{Binding ContentViewModel.TakePhoto}" />
+            
             <Button Content="Sign-Out" 
-                    Grid.Row="2" Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch"
-                    Margin="5"
-                    Command="{Binding ContenViewModel.SignOutCommand}"/>
+                Grid.Row="2" Grid.Column="0"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Margin="5"
+                Command="{Binding ContentViewModel.SignOutCommand}"/>
         </Grid>
     </Grid>
 </Page>

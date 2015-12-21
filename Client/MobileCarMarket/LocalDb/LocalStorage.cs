@@ -32,13 +32,19 @@
 
         public static void Initialize(string dbFile, string keySeed)
         {
-            if(LocalStorage.dbFile != null)
+            if (LocalStorage.dbFile != null)
             {
                 throw new InvalidOperationException("LocalDb already initialized");
             }
 
             LocalStorage.dbFile = dbFile;
             LocalStorage.keySeed = keySeed;
+        }
+
+        public static void Uninitialize()
+        {
+            LocalStorage.dbFile = null;
+            LocalStorage.keySeed = null;
         }
     }
 }
