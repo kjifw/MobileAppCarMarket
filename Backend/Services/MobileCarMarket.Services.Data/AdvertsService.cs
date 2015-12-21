@@ -43,6 +43,39 @@
                 .Where(a => a.Id == id);
         }
 
+        public IQueryable<Advert> GetAdvertsOfUser(string userId)
+        {
+            return this.adverts.All()
+                .Where(a => a.UserId == userId);
+        }
+
+        public bool AddImageToAdvert(int id, string userId, string imageUrl)
+        {
+            var advert = this.adverts.All()
+                .Where(a => a.Id == id && a.UserId == userId)
+                .FirstOrDefault();
+
+            if(advert == null)
+            {
+                return false;
+            }
+
+            var imageData = new ImageData()
+            {
+                Url = imageUrl
+            };
+
+            if (advert.FirstImageData == null)
+            {
+                advert.FirstImageData = imageData;
+            }
+
+            advert.ImagesData.Add(imageData);
+            this.adverts.SaveChanges();
+
+            return true;
+        }
+
         public bool AddAdvertToUserFavourites(int id, string userId)
         {
             return true;

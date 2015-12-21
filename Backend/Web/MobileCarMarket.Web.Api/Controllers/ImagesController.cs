@@ -1,21 +1,25 @@
 ﻿namespace MobileCarMarket.Web.Api.Controllers
 {
+    using System;
     using System.Net.Http;
     using System.Web.Hosting;
     using System.Web.Http;
     using System.Threading.Tasks;
+    using Microsoft.AspNet.Identity;
 
     using Services.Data.Contracts;
     using Common.Constants;
-
+    
     [Authorize]
     public class ImagesController : ApiController
     {
         private IImagesService imagesService;
+        private IAdvertsService advertsService;
 
-        public ImagesController(IImagesService imagesService)
+        public ImagesController(IImagesService imagesService, IAdvertsService advertsService)
         {
             this.imagesService = imagesService;
+            this.advertsService = advertsService;
         }
 
         [Route("api/images/{advertId}/{longitude}/{latitude}")]
@@ -28,9 +32,18 @@
 
             await Request.Content.LoadIntoBufferAsync();
             var provider = await Request.Content.ReadAsMultipartAsync(new MultipartMemoryStreamProvider());
-            var result = await this.imagesService.StoreImage(provider.Contents[0], HostingEnvironment.MapPath(GlobalConstants.ImagesStoreLocation), advertId, "");
-            
-            if(result == false)
+
+            try
+            {
+                var fileName = await this.imagesService.StoreImage(provider.Contents[0], HostingEnvironment.MapPath(GlobalConstants.ImagesStoreLocation), advertId, "");
+                var baseUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority);
+                var imageUrl = string.Format("{0}/images/{1}", baseUrl, fileName);
+
+                var userId = this.User.Identity.GetUserId();
+
+                this.advertsService.AddImageToAdvert(advertId, userId, imageUrl);
+            }
+            catch
             {
                 return this.BadRequest();
             }

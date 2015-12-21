@@ -6,11 +6,11 @@
     using System.Linq;
 
     using Microsoft.AspNet.Identity;
+    using AutoMapper.QueryableExtensions;
 
     using Models.Adverts;
     using Services.Data.Contracts;
     using Infrastructure.Validation;
-    using AutoMapper.QueryableExtensions;
 
     [Authorize]
     public class AdvertsController : ApiController
@@ -41,6 +41,7 @@
             return this.Created(string.Format("/api/adverts/{0}", advertResult.Id), advertResult);
         }
 
+        [Route("api/adverts/search")]
         public IHttpActionResult Get(SearchAdvertsFiltersModel searchAdvertsFiltersModel)
         {
             var filteredResults = this.advertsService
@@ -53,7 +54,14 @@
 
         public IHttpActionResult GetAdvertsOfCurrentUser()
         {
-            return this.Ok();
+            var userId = this.User.Identity.GetUserId();
+
+            var advertsOfUser = this.advertsService
+                .GetAdvertsOfUser(userId)
+                .ProjectTo<ListedAdvertResponseModel>()
+                .ToList();
+
+            return this.Ok<List<ListedAdvertResponseModel>>(advertsOfUser);
         }
 
         public IHttpActionResult GetFullAdvertInfoById(int id)

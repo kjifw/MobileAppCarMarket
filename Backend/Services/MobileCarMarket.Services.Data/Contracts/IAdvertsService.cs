@@ -10,6 +10,10 @@
 
         IQueryable<Advert> GetAdvertDetails(int id);
 
+        IQueryable<Advert> GetAdvertsOfUser(string userId);
+
+        bool AddImageToAdvert(int id, string userId, string imageUrl);
+
         bool DeleteAdvert(int id, string userId);
              
         bool AddAdvertToUserFavourites(int id, string userId);
