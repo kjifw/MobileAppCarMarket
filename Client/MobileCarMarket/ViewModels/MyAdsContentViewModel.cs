@@ -26,6 +26,7 @@
                 }
 
                 this.myAdsList.Clear();
+
                 foreach (var item in value)
                 {
                     this.myAdsList.Add(item);

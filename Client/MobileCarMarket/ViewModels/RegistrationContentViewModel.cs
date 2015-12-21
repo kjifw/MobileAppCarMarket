@@ -1,13 +1,15 @@
 ﻿namespace MobileCarMarket.ViewModels
 {
     using System.Windows.Input;
+    using System.Net.Http;
 
     using Helpers;
     using Http;
-
+    
     public class RegistrationContentViewModel : ViewModelBase, IContentViewModel
     {
         private ICommand signUpCommand;
+        private bool isSigningUp = false;
 
         public ICommand SignUpCommand
         {
@@ -17,6 +19,11 @@
                 {
                     this.signUpCommand = new DelegateCommandWithParameter<RegistrationViewModel>(async (model) =>
                     {
+                        if(this.isSigningUp == true)
+                        {
+                            return;
+                        }
+
                         if(model.Email.Length == 0)
                         {
                             Notification.Publish("Please input email");
@@ -41,11 +48,26 @@
                             return;
                         }
 
+                        this.isSigningUp = true;
+
                         var httpAuth = new HttpAuth("http://localhost:60178/api/account/register");
-                        var authResult = await httpAuth.Register(model.Email, model.Password, model.ConfirmPassword);
+
+                        HttpResult authResult = null;
+
+                        try
+                        {
+                            authResult = await httpAuth.Register(model.Email, model.Password, model.ConfirmPassword);
+                        }
+                        catch(HttpRequestException)
+                        {
+                            this.isSigningUp = false;
+                            Notification.Publish("Server seems down");
+                            return;
+                        }
                         
                         if(authResult.Succeeded == false)
                         {
+                            this.isSigningUp = false;
                             Notification.Publish("Error. Email is probably already registered");
                             return;
                         }

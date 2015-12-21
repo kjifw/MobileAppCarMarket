@@ -4,6 +4,7 @@
     using System.Windows.Input;
     using System.IO;
     using Windows.Storage;
+    using System.Net.Http;
 
     using Helpers;
     using Http;
@@ -14,6 +15,7 @@
     {
         private ICommand signInCommand;
         private ICommand singUpCommand;
+        private bool isSigningIn = false;
 
         public ICommand SignInCommand
         {
@@ -23,6 +25,11 @@
                 {
                     this.signInCommand = new DelegateCommandWithParameter<StartUpViewModel>(async (model) =>
                     {
+                        if(this.isSigningIn == true)
+                        {
+                            return;
+                        }
+
                         if(model.Email.Length == 0)
                         {
                             Notification.Publish("Please input email");
@@ -35,11 +42,26 @@
                             return;
                         }
 
+                        this.isSigningIn = true;
+
                         var httpAuth = new HttpAuth("http://localhost:60178/token");
-                        var authResult = await httpAuth.Login(model.Email, model.Password);
+
+                        HttpResult authResult = null;
+
+                        try
+                        {
+                            authResult = await httpAuth.Login(model.Email, model.Password);
+                        }
+                        catch(HttpRequestException)
+                        {
+                            this.isSigningIn = false;
+                            Notification.Publish("Server seems down");
+                            return;
+                        }
 
                         if(authResult.Succeeded == false)
                         {
+                            this.isSigningIn = false;
                             Notification.Publish("Wrong username or password");
                             return;
                         }

@@ -71,6 +71,7 @@
                      Margin="5"
                      Text="{Binding Price, Mode=TwoWay}"/>
             <TextBox Name="Description"
+                     AcceptsReturn="True"
                      Grid.Row="3"
                      PlaceholderText="Enter description"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"

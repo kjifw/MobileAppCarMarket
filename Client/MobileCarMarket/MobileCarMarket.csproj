@@ -135,6 +135,7 @@
     </Compile>
     <Compile Include="RemoteServiceModels\ListedAdvertModel.cs" />
     <Compile Include="RemoteServiceModels\CreateAdvertModel.cs" />
+    <Compile Include="RemoteServiceModels\SearchAdversFiltersModel.cs" />
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>

@@ -100,23 +100,9 @@
 
         public IQueryable<Advert> GetAdvertsByFilters(string make, string model, bool onlyNew)
         {
-            var predicate = PredicateBuilder.True<Advert>();
-
-            predicate = predicate.And<Advert>(a => a.IsDeleted == false);
-            predicate = predicate.And<Advert>(a => a.IsNew == onlyNew);
-
-            if(make != null)
-            {
-                predicate = predicate.And<Advert>(a => a.Make == make);
-            }
-
-            if(model != null)
-            {
-                predicate = predicate.And<Advert>(a => a.Model == model);
-            }
-
-            return this.adverts.All()
-                .Where(predicate);
+            return this.adverts
+                .All()
+                .Where(a => (make == null || a.Make == make) && (model == null || a.Model == model) && (onlyNew == false || a.IsNew == onlyNew));
         }
     }
 }

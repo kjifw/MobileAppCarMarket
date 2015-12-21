@@ -42,7 +42,8 @@
         }
 
         [Route("api/adverts/search")]
-        public IHttpActionResult Get(SearchAdvertsFiltersModel searchAdvertsFiltersModel)
+        [HttpPost]
+        public IHttpActionResult Search(SearchAdvertsFiltersModel searchAdvertsFiltersModel)
         {
             var filteredResults = this.advertsService
                 .GetAdvertsByFilters(searchAdvertsFiltersModel.Make, searchAdvertsFiltersModel.Model, searchAdvertsFiltersModel.IsNew)

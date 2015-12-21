@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Windows.Storage.Streams;
     using Windows.Web.Http;
     using Windows.Web.Http.Headers;
 
@@ -14,6 +15,30 @@
         {
             this.apiUrl = apiUrl;
             this.token = token;
+        }
+
+        public async Task<HttpResult> DownloadJsonData(string requestContent)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Add(new HttpMediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + this.token);
+                var response = await client.PostAsync(new Uri(this.apiUrl, UriKind.Absolute), new HttpStringContent(requestContent, UnicodeEncoding.Utf8, "application/json"));
+
+                if (response.StatusCode != HttpStatusCode.Ok)
+                {
+                    return new HttpResult()
+                    {
+                        Succeeded = false
+                    };
+                }
+
+                return new HttpResult()
+                {
+                    Succeeded = true,
+                    Result = await response.Content.ReadAsStringAsync()
+                };
+            }
         }
 
         public async Task<HttpResult> DownloadJsonData()
