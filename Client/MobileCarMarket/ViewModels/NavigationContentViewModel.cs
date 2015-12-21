@@ -16,6 +16,7 @@
         private ICommand searchCommand;
         private ICommand publishCommand;
         private ICommand viewMyAdsCommand;
+        private ICommand signOutCommand;
         private ICommand takePhoto;
 
         public ICommand SearchCommand
@@ -63,6 +64,29 @@
                 }
 
                 return this.viewMyAdsCommand;
+            }
+        }
+
+        public ICommand SignOutCommand
+        {
+            get
+            {
+                if (this.signOutCommand == null)
+                {
+                    this.signOutCommand = new DelegateCommand(() =>
+                    {
+                        var storage = LocalStorage.GetInstance;
+
+                        var token = storage
+                            .SecureGetAll<Token>(LocalStorage.KeySeed)[storage.SecureGetCount<Token>() - 1];
+
+                        storage.SecureDelete<Token>(token.Id);
+
+                        new NavigationService().Navigate(typeof(MainPage));
+                    });
+                }
+
+                return this.signOutCommand;
             }
         }
 

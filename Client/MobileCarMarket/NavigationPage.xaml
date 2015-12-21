@@ -57,6 +57,13 @@
                 HorizontalAlignment="Stretch"
                 Margin="5"
                 Command="{Binding ContentViewModel.TakePhoto}" />
+            <Button Content="Sign-Out" 
+                    Grid.Row="2" Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Margin="5"
+                    Command="{Binding ContenViewModel.SignOutCommand}"/>
         </Grid>
     </Grid>
 </Page>
